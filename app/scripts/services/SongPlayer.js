@@ -21,6 +21,7 @@
             if( song !== null){
                 currentBuzzObject.play();
                 song.playing = true;
+                SongPlayer.setVolume(currentBuzzObject.getVolume())
             }
         };
         
@@ -68,6 +69,11 @@
         *  @type {Object} */
         SongPlayer.currentSong = null;
         
+        /* @desc Hold value of volume bar
+        *  @type {Object} */
+        SongPlayer.volume = 50;
+        
+        
         
         /* @function play
         *  @desc Plays song that is passed as a paramater
@@ -77,6 +83,7 @@
             if (SongPlayer.currentSong !== song) {
                 setSong(song);
                 playSong(song);
+                
             } 
             else if (SongPlayer.currentSong === song) {
                 playSong(song);   
@@ -130,6 +137,18 @@
                 currentBuzzObject.setTime(time);
             }
         };
+        
+        /* @function setVolume
+        *  @desc Sets volume of currently playing song
+        *  @param {Number} value*/
+        SongPlayer.setVolume = function(value){
+            
+            SongPlayer.volume = value;
+            currentBuzzObject.setVolume(SongPlayer.volume);
+
+        };
+        
+        
         
             return SongPlayer;
     }
